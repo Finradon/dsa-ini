@@ -28,6 +28,10 @@ class humanoid:
     @classmethod
     def orc_chief(cls):
         return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3)
+    
+    @classmethod
+    def dummy(cls):
+        return cls("Dummy", 1, 1, (1, 1), (1, 1), 1, 1, 1, 1, 1, 1)
 
     @classmethod
     def from_json(cls, file: str):
@@ -50,6 +54,16 @@ class humanoid:
 
         tp = self.tp_roll() # ToDo: maybe only return tp when succesful?
         return (res, suc, tp)
+    
+    def parry_roll(self) -> tuple:
+        res = d20()
+
+        if res <= self.pa:
+            suc = True
+        else: 
+            suc = False
+
+        return (res, suc)
     
     def receive_damage(self, value: int):
         damage = value - self.rs
