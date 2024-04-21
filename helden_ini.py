@@ -113,8 +113,8 @@ with ini_container:
                 st.subheader(element.rs)
             with col8:
                 with st.form(key= f"{i}"):
-                    dmg = st.number_input(label="a", min_value=1, key=i+60)
-                    if st.form_submit_button("Submit"):
+                    dmg = st.number_input(label="Schaden", min_value=1, key=i+60)
+                    if st.form_submit_button("DMG"):
                         element.receive_damage(dmg)
 
 # st.write(st.session_state)
