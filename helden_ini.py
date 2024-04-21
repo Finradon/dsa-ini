@@ -5,7 +5,6 @@ st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
 
 if 'data' not in st.session_state:
-    # st.session_state['data'] = pd.DataFrame([humanoid.bandit().to_dict(), humanoid.bandit().to_dict()])
     st.session_state['data'] = [humanoid.dummy()]
 
 
