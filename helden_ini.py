@@ -16,7 +16,7 @@ if 'round' not in st.session_state:
 
 
 with st.container(border=True):
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
         button1 = st.button('add bandit')
 
@@ -31,6 +31,9 @@ with st.container(border=True):
     
     with col5:
         button5 = st.button('Reset')
+    
+    with col6:
+        st.header(f"Runde: {st.session_state['round']}")
 
 ini_container = st.container(border=True)
 
