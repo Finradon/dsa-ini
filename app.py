@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from enemies.humanoid import humanoid
-import utilities.df_utils as dfutils
 
 if 'data' not in st.session_state:
     st.session_state['data'] = pd.DataFrame([humanoid.bandit().to_dict()])

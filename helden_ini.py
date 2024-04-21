@@ -1,7 +1,5 @@
 import streamlit as st
-# import pandas as pd
 from enemies.humanoid import humanoid
-# import utilities.df_utils as dfutils
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
@@ -51,10 +49,23 @@ if button2:
 
 if button3:
     st.session_state['data'].sort(key=lambda x: x.ini, reverse=True)
+    for element in st.session_state['data']:
+        element.turn = False
+
+if button4:
+    if len(st.session_state['data'])-1 != st.session_state['ini_idx']:
+        st.session_state['ini_idx'] += 1
+    else:
+        st.session_state['ini_idx'] = 0
+        st.session_state['round'] += 1
 
 if button5:
     st.session_state['data'] = [humanoid.dummy()]
+    st.session_state['ini_idx'] = 0
+    st.session_state['round'] = 1
 
+st.session_state['data'][st.session_state['ini_idx']].turn = True
+st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 with ini_container:
     col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 1, 1, 4, 4, 2, 1])
     with st.container(border=True):
@@ -72,10 +83,10 @@ with ini_container:
             st.header('Wunden')
         with col7:
             st.header('RS')
-                
+
     for i, element in enumerate(st.session_state['data']):
         # print(row)
-        with st.container(border=True):
+        with st.container(border=element.turn):
             col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 1, 1, 4, 4, 2, 1])
             with col1:
                 st.subheader(element.name)
@@ -93,7 +104,7 @@ with ini_container:
             with col5:
                 c1, c2 = st.columns([1, 3])
                 with c1:
-                    atbutton = st.button(f'AT: {element.pa}', key=i+30)
+                    atbutton = st.button(f'PA: {element.pa}', key=i+30)
                 with c2:
                     if atbutton:
                         st.subheader(element.parry_roll())

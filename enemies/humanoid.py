@@ -16,6 +16,7 @@ class humanoid:
         self.rs: int = rs
         self.ko: int = ko
         self.wound_count = 0
+        self.turn: bool = False
 
     @classmethod
     def bandit(cls):
