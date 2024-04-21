@@ -17,6 +17,23 @@ class humanoid:
         self.ko: int = ko
         self.wound_count = 0
 
+    @classmethod
+    def bandit(cls):
+        return cls("Bandit", 14, 10, (1, 10), (1, 3), 30, 12, 12, 13, 4, 2)
+
+    @classmethod
+    def orc(cls):
+        return cls("Ork", 15, 10, (1, 12), (1, 5), 35, 14, 13, 14, 3, 2)
+    
+    @classmethod
+    def orc_chief(cls):
+        return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3)
+
+    @classmethod
+    def from_json(cls, file: str):
+        # ToDo: implement classmethod to create enemy from a json file
+        raise NotImplementedError
+
     def tp_roll(self) -> int:
         return xd6(self.tp[0]) + self.tp[1]
 
@@ -55,3 +72,19 @@ class humanoid:
             self.pa += 3
             self.ini += 3
             self.ge += 3
+
+    def to_dict(self) -> dict:
+        data = {"Name": self.name,
+                "INI": self.ini,
+                "LeP": self.lep,
+                "AT": self.at,
+                "PA": self.pa,
+                "RS": self.rs,
+                "MR": self.mr,
+                "MU": self.mu,
+                "GE": self.ge,
+                "KO": self.ko,
+                "Wunden": self.wound_count
+                }
+        
+        return data
