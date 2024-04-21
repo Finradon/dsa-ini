@@ -7,7 +7,7 @@ class humanoid:
         self.name:str = name
         self.at: int = at
         self.pa: int = pa
-        self.ini_param: int = ini_param # tuple containing number of d6s on index 0, and base ini on index 1
+        self.ini_param: tuple = ini_param # tuple containing number of d6s on index 0, and base ini on index 1
         self.ini: int = self.ini_roll()
         self.tp: tuple = tp # tuple containing number of d6s on index 0, and base tp on index 1
         self.lep: int = lep
