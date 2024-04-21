@@ -1,4 +1,5 @@
 from utilities.dice import xd6, d20
+from utilities.formatting import roll_tuple_to_string
 
 class humanoid:
     
@@ -49,25 +50,23 @@ class humanoid:
         res = d20()
 
         if res <= self.at:
-            suc = ":white_check_mark:"
-            tp = f"TP: {self.tp_roll()}"
+            success = True
         else: 
-            suc = ":x:"
-            tp = ""
+            success = False
 
-        res_str = f'{suc}:{res} ' + tp
-        return res_str
+        res_tuple = (res, success, self.tp_roll())
+        return roll_tuple_to_string(res_tuple)
     
     def parry_roll(self) -> str:
         res = d20()
 
         if res <= self.pa:
-            suc = ":white_check_mark:"
+            success = True
         else: 
-            suc = ":x:"
+            success = False
 
-        res_str = f'{suc}:{res}'
-        return res_str
+        res_tuple = (res, success, self.tp_roll())
+        return roll_tuple_to_string(res_tuple)
     
     def receive_damage(self, value: int):
         damage = value - self.rs
