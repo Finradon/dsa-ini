@@ -44,26 +44,29 @@ class humanoid:
     def ini_roll(self):
         return xd6(self.ini_param[0]) + self.ini_param[1]
     
-    def attack_roll(self) -> tuple:
+    def attack_roll(self) -> str:
         res = d20()
 
         if res <= self.at:
-            suc = True
+            suc = ":white_check_mark:"
+            tp = f"TP: {self.tp_roll()}"
         else: 
-            suc = False
+            suc = ":x:"
+            tp = ""
 
-        tp = self.tp_roll() # ToDo: maybe only return tp when succesful?
-        return (res, suc, tp)
+        res_str = f'{suc}:{res} ' + tp
+        return res_str
     
-    def parry_roll(self) -> tuple:
+    def parry_roll(self) -> str:
         res = d20()
 
         if res <= self.pa:
-            suc = True
+            suc = ":white_check_mark:"
         else: 
-            suc = False
+            suc = ":x:"
 
-        return (res, suc)
+        res_str = f'{suc}:{res}'
+        return res_str
     
     def receive_damage(self, value: int):
         damage = value - self.rs

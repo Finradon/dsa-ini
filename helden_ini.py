@@ -56,7 +56,7 @@ if button5:
     st.session_state['data'] = [humanoid.dummy()]
 
 with ini_container:
-    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+    col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 1, 1, 4, 4, 2, 1])
     with st.container(border=True):
         with col1:
             st.header('Name')
@@ -76,7 +76,7 @@ with ini_container:
     for i, element in enumerate(st.session_state['data']):
         # print(row)
         with st.container(border=True):
-            col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+            col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 1, 1, 4, 4, 2, 1])
             with col1:
                 st.subheader(element.name)
             with col2:
@@ -84,14 +84,14 @@ with ini_container:
             with col3:
                 st.subheader(element.lep)        
             with col4:
-                c1, c2 = st.columns(2)
+                c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'AT: {element.at}', key=i)
                 with c2:
                     if atbutton:
                         st.subheader(element.attack_roll())
             with col5:
-                c1, c2 = st.columns(2)
+                c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'AT: {element.pa}', key=i+30)
                 with c2:
@@ -102,4 +102,4 @@ with ini_container:
             with col7:
                 st.subheader(element.rs)
 
-st.write(st.session_state)
+# st.write(st.session_state)
