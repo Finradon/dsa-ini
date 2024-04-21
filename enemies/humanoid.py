@@ -70,6 +70,8 @@ class humanoid:
     
     def receive_damage(self, value: int):
         damage = value - self.rs
+        if damage < 0:
+            damage = 0
         self.lep -= damage
 
         if damage > self.ko:
