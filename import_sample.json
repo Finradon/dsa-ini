@@ -1,0 +1,19 @@
+{
+    "Name": "Nermaka Phyrikos",
+    "AT": 20,
+    "PA": 21,
+    "INI": {
+        "W6": 1,
+        "Basis": 11
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 4
+    },
+    "MU": 15,
+    "GE": 15,
+    "KO": 13,
+    "LeP": 34,
+    "MR": 4,
+    "RS": 0
+}
