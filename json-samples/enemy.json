@@ -1,19 +1,19 @@
 {
-    "Name": "Nermaka Phyrikos",
-    "AT": 20,
-    "PA": 21,
+    "Name": "Archer",
+    "AT": 14,
+    "PA": 12,
     "INI": {
         "W6": 1,
-        "Basis": 11
+        "Basis": 10
     },
     "TP": {
         "W6": 1,
         "Basis": 4
     },
-    "MU": 15,
-    "GE": 15,
+    "MU": 12,
+    "GE": 13,
     "KO": 13,
-    "LeP": 34,
+    "LeP": 30,
     "MR": 4,
     "RS": 0
 }
