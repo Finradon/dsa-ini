@@ -1,5 +1,6 @@
 import streamlit as st
 from enemies.humanoid import humanoid
+import uuid
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
@@ -69,7 +70,7 @@ if button5:
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 with ini_container:
-    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([2, 1, 1, 4, 4, 2, 1, 2])
+    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
     with st.container(border=True):
         with col1:
             st.header('Name')
@@ -89,7 +90,7 @@ with ini_container:
     for i, element in enumerate(st.session_state['data']):
         # print(row)
         with st.container(border=element.turn):
-            col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([2, 1, 1, 4, 4, 2, 1, 2])
+            col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
             with col1:
                 st.subheader(element.name)
             with col2:
@@ -115,9 +116,8 @@ with ini_container:
             with col7:
                 st.subheader(element.rs)
             with col8:
-                with st.form(key= f"{i}"):
-                    dmg = st.number_input(label="Schaden", min_value=1, key=i+60)
-                    if st.form_submit_button("DMG"):
-                        element.receive_damage(dmg)
-
+                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+60)
+            with col9:
+                if st.button("DMG", key=i+90):
+                    element.receive_damage(dmg)
 # st.write(st.session_state)
