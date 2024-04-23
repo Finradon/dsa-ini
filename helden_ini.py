@@ -122,6 +122,6 @@ with ini_container:
                     if dmg is not None:
                         element.receive_damage(dmg)
 
-                dmg_button = st.button("DMG", key=i+90, on_click=process_dmg())
+                dmg_button = st.button("DMG", key=i+90, on_click=process_dmg)
                 
 # st.write(st.session_state)
