@@ -126,7 +126,7 @@ with ini_container:
 with st.container(border=True):
     col1, col2 = st.columns(2)
     with col1:
-        files = st.file_uploader("Importiere eigene Charaktere:", accept_multiple_files=True)
+        files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
 
     with col2:
         def process_files():
