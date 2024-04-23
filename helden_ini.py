@@ -118,6 +118,10 @@ with ini_container:
             with col8:
                 dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+60)
             with col9:
-                if st.button("DMG", key=i+90):
-                    element.receive_damage(dmg)
+                def process_dmg():
+                    if dmg is not None:
+                        element.receive_damage(dmg)
+
+                dmg_button = st.button("DMG", key=i+90, on_click=process_dmg())
+                
 # st.write(st.session_state)
