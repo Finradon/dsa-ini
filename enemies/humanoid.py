@@ -84,7 +84,7 @@ class humanoid:
         else: 
             success = False
 
-        res_tuple = (res, success, self.tp_roll())
+        res_tuple = (res, success)
         return roll_tuple_to_string(res_tuple)
     
     def receive_damage(self, value: int):
