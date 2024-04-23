@@ -39,7 +39,24 @@ class humanoid:
     @classmethod
     def from_json(cls, file: str):
         json_data = json.loads(file)
-        return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3
+        return cls(
+            json_data["Name"],
+            json_data["AT"],
+            json_data["PA"],
+            (
+                json_data["INI"]["W6"],
+                json_data["INI"]["Basis"]
+            ),
+            (
+                json_data["TP"]["W6"],
+                json_data["TP"]["Basis"]
+            ),
+            json_data["LeP"],
+            json_data["MU"],
+            json_data["GE"],
+            json_data["KO"],
+            json_data["MR"],
+            json_data["RS"]
         )
 
     def tp_roll(self) -> int:

@@ -1,6 +1,7 @@
 import streamlit as st
 from enemies.humanoid import humanoid
 
+
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
 
@@ -16,7 +17,7 @@ if 'round' not in st.session_state:
 
 
 with st.container(border=True):
-    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
         button1 = st.button('add bandit')
 
@@ -34,9 +35,6 @@ with st.container(border=True):
     
     with col6:
         st.header(f"Runde: {st.session_state['round']}")
-
-    with col7:
-        button7 = st.button('Import')
 
 ini_container = st.container(border=True)
 
@@ -67,16 +65,8 @@ if button4:
 if button5:
     st.session_state['data'] = [humanoid.dummy()]
     st.session_state['ini_idx'] = 0
-    st.session_state['round'] = 1
+    st.session_state['round'] = 1   
 
-if button7:
-    file = st.file_uploader("Choose your json file(s)")     #TODO file is not loaded properly
-    if file is not None:
-        file_data = file.getvalue().decode("utf-8")
-        if st.session_state['data'][0].name == "Dummy":
-            st.session_state['data'][0] = humanoid.from_json(file=file_data)
-        else:
-            st.session_state['data'].append(humanoid.from_json(file=file_data))
 
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
@@ -131,5 +121,21 @@ with ini_container:
                     dmg = st.number_input(label="Schaden", min_value=1, key=i+60)
                     if st.form_submit_button("DMG"):
                         element.receive_damage(dmg)
+
+with st.container(border=True):
+    col1, col2 = st.columns(2)
+    with col1:
+        files = st.file_uploader("Importiere eigene Charaktere:", accept_multiple_files=True)
+
+    with col2:
+        def process_files():
+            for file in files:
+                file_data = file.getvalue().decode("utf-8")
+                if st.session_state['data'][0].name == "Dummy":
+                    st.session_state['data'][0] = humanoid.from_json(file=file_data)
+                else:
+                    st.session_state['data'].append(humanoid.from_json(file=file_data))
+        
+        import_button = st.button('Import', on_click=process_files())
 
 # st.write(st.session_state)
