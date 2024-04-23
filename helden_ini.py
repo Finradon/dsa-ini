@@ -118,11 +118,10 @@ with ini_container:
             with col7:
                 st.subheader(element.rs)
             with col8:
-<<<<<<< HEAD
-                with st.form(key= f"{i}"):
-                    dmg = st.number_input(label="Schaden", min_value=1, key=i+60)
-                    if st.form_submit_button("DMG"):
-                        element.receive_damage(dmg)
+                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+60)
+            with col9:
+                if st.button("DMG", key=i+90):
+                    element.receive_damage(dmg)
 
 with st.container(border=True):
     col1, col2 = st.columns(2)
@@ -140,10 +139,4 @@ with st.container(border=True):
         
         import_button = st.button('Import', on_click=process_files())
 
-=======
-                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+60)
-            with col9:
-                if st.button("DMG", key=i+90):
-                    element.receive_damage(dmg)
->>>>>>> main
 # st.write(st.session_state)
