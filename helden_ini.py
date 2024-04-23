@@ -137,6 +137,6 @@ with st.container(border=True):
                 else:
                     st.session_state['data'].append(humanoid.from_json(file=file_data))
         
-        import_button = st.button('Import', on_click=process_files())
+        import_button = st.button('Import', on_click=process_files)
 
 # st.write(st.session_state)
