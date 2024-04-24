@@ -1,6 +1,7 @@
 import json
 from utilities.dice import xd6, d20
 from utilities.formatting import roll_tuple_to_string
+import math
 
 class humanoid:
     
@@ -88,12 +89,16 @@ class humanoid:
         return roll_tuple_to_string(res_tuple)
     
     def receive_damage(self, value: int):
+        if value is None:
+            pass
+
         damage = value - self.rs
         if damage < 0:
             damage = 0
         self.lep -= damage
 
-        if damage > self.ko:
+        nr_wounds = math.floor((damage-1)/self.ko)
+        for _ in range(nr_wounds):
             self.add_wound()
 
     def add_wound(self):
