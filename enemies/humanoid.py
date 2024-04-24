@@ -1,3 +1,4 @@
+import json
 from utilities.dice import xd6, d20
 from utilities.formatting import roll_tuple_to_string
 
@@ -37,8 +38,26 @@ class humanoid:
 
     @classmethod
     def from_json(cls, file: str):
-        # ToDo: implement classmethod to create enemy from a json file
-        raise NotImplementedError
+        json_data = json.loads(file)
+        return cls(
+            json_data["Name"],
+            json_data["AT"],
+            json_data["PA"],
+            (
+                json_data["INI"]["W6"],
+                json_data["INI"]["Basis"]
+            ),
+            (
+                json_data["TP"]["W6"],
+                json_data["TP"]["Basis"]
+            ),
+            json_data["LeP"],
+            json_data["MU"],
+            json_data["GE"],
+            json_data["KO"],
+            json_data["MR"],
+            json_data["RS"]
+        )
 
     def tp_roll(self) -> int:
         return xd6(self.tp[0]) + self.tp[1]

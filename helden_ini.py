@@ -2,6 +2,7 @@ import streamlit as st
 from enemies.humanoid import humanoid
 import uuid
 
+
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
 
@@ -65,7 +66,8 @@ if button4:
 if button5:
     st.session_state['data'] = [humanoid.dummy()]
     st.session_state['ini_idx'] = 0
-    st.session_state['round'] = 1
+    st.session_state['round'] = 1   
+
 
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
@@ -124,4 +126,21 @@ with ini_container:
 
                 dmg_button = st.button("DMG", key=i+90, on_click=process_dmg)
                 
+
+with st.container(border=True):
+    col1, col2 = st.columns(2)
+    with col1:
+        files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
+
+    with col2:
+        def process_files():
+            for file in files:
+                file_data = file.getvalue().decode("utf-8")
+                if st.session_state['data'][0].name == "Dummy":
+                    st.session_state['data'][0] = humanoid.from_json(file=file_data)
+                else:
+                    st.session_state['data'].append(humanoid.from_json(file=file_data))
+        
+        import_button = st.button('Import', on_click=process_files)
+
 # st.write(st.session_state)
