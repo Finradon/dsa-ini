@@ -109,7 +109,7 @@ with ini_container:
             with col5:
                 c1, c2 = st.columns([1, 3])
                 with c1:
-                    atbutton = st.button(f'PA: {element.pa}', key=i+30)
+                    atbutton = st.button(f'PA: {element.pa}', key=i+100)
                 with c2:
                     if atbutton:
                         st.subheader(element.parry_roll())
@@ -118,13 +118,9 @@ with ini_container:
             with col7:
                 st.subheader(element.rs)
             with col8:
-                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+60)
+                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+200)
             with col9:
-                def process_dmg():
-                    if dmg is not None:
-                        element.receive_damage(dmg)
-
-                dmg_button = st.button("DMG", key=i+90, on_click=process_dmg)
+                dmg_button = st.button("DMG", key=i+300, on_click=element.receive_damage, kwargs={"value": dmg})
                 
 
 with st.container(border=True):
@@ -133,14 +129,14 @@ with st.container(border=True):
         files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
 
     with col2:
-        def process_files():
-            for file in files:
+        def process_files(file_items):
+            for file in file_items:
                 file_data = file.getvalue().decode("utf-8")
                 if st.session_state['data'][0].name == "Dummy":
                     st.session_state['data'][0] = humanoid.from_json(file=file_data)
                 else:
                     st.session_state['data'].append(humanoid.from_json(file=file_data))
         
-        import_button = st.button('Import', on_click=process_files)
+        import_button = st.button('Import', on_click=process_files, kwargs={"file_items": files})
 
 # st.write(st.session_state)
