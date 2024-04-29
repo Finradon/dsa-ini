@@ -8,12 +8,13 @@ def add_enemy(enemy: humanoid):
     else:
         st.session_state['data'].append(enemy)
 
-# button 3: sort the initiative list
+# button3: sort the initiative list
 def sort_enemies():
     st.session_state['data'].sort(key=lambda x: x.ini, reverse=True)
     for element in st.session_state['data']:
         element.turn = False
 
+# button4: go next in the initiative list
 def next():
     if len(st.session_state['data'])-1 != st.session_state['ini_idx']:
         st.session_state['ini_idx'] += 1
@@ -21,6 +22,7 @@ def next():
         st.session_state['ini_idx'] = 0
         st.session_state['round'] += 1
 
+# button5: reset the list
 def reset():
     st.session_state['data'] = [humanoid.dummy()]
     st.session_state['ini_idx'] = 0

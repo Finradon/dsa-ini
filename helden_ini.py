@@ -20,10 +20,10 @@ if 'round' not in st.session_state:
 with st.container(border=True):
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        button1 = st.button('add bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.bandit()})
+        button1 = st.button('Add Bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.bandit()})
 
     with col2:
-        button2 = st.button('add orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.orc()})
+        button2 = st.button('Add Orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.orc()})
 
     with col3:
         button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
@@ -43,11 +43,11 @@ with st.container(border=True):
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 
-# declaire and fill the container with the participants
+# declare and fill the container with the participants
 
 ini_container = st.container(border=True)
 with ini_container:
-    # Column Titles
+    # column titles
     col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
     with st.container(border=True):
         with col1:
@@ -80,7 +80,7 @@ with ini_container:
             with col3:
                 st.subheader(element.lep)        
             with col4:
-                # define an attack roll button
+                # attack roll button
                 c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'AT: {element.at}', key=i)
