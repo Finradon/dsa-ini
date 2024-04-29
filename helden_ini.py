@@ -1,5 +1,6 @@
 import streamlit as st
 from enemies.humanoid import humanoid
+import utilities.button_functions as bt_funcs
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
@@ -19,60 +20,32 @@ if 'round' not in st.session_state:
 with st.container(border=True):
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        button1 = st.button('add bandit')
+        button1 = st.button('add bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.bandit()})
 
     with col2:
-        button2 = st.button('add orc')
+        button2 = st.button('add orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.orc()})
 
     with col3:
-        button3 = st.button('Sort')
+        button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
 
     with col4:
-        button4 = st.button('Next')
+        button4 = st.button('Next', on_click=bt_funcs.next)
     
     with col5:
-        button5 = st.button('Reset')
+        button5 = st.button('Reset', on_click=bt_funcs.reset)
     
     with col6:
         st.header(f"Runde: {st.session_state['round']}")
 
 
-ini_container = st.container(border=True)
-
-if button1:
-    if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = humanoid.bandit()
-    else:
-        st.session_state['data'].append(humanoid.bandit())
-
-if button2:
-    if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = humanoid.orc()
-    else:
-        st.session_state['data'].append(humanoid.orc())
-
-if button3:
-    st.session_state['data'].sort(key=lambda x: x.ini, reverse=True)
-    for element in st.session_state['data']:
-        element.turn = False
-
-if button4:
-    if len(st.session_state['data'])-1 != st.session_state['ini_idx']:
-        st.session_state['ini_idx'] += 1
-    else:
-        st.session_state['ini_idx'] = 0
-        st.session_state['round'] += 1
-
-if button5:
-    st.session_state['data'] = [humanoid.dummy()]
-    st.session_state['ini_idx'] = 0
-    st.session_state['round'] = 1   
 
 # set the appropriate particiapants turn to True
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 
 # declaire and fill the container with the participants
+
+ini_container = st.container(border=True)
 with ini_container:
     # Column Titles
     col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
