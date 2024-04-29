@@ -27,3 +27,12 @@ def reset():
     st.session_state['data'] = [humanoid.dummy()]
     st.session_state['ini_idx'] = 0
     st.session_state['round'] = 1   
+
+# json import button
+def process_files(file_items):
+    for file in file_items:
+        file_data = file.getvalue().decode("utf-8")
+        if st.session_state['data'][0].name == "Dummy":
+            st.session_state['data'][0] = humanoid.from_json(file=file_data)
+        else:
+            st.session_state['data'].append(humanoid.from_json(file=file_data))
