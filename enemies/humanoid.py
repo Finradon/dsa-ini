@@ -21,6 +21,7 @@ class humanoid:
         self.wound_count = 0
         self.turn: bool = False
 
+    # classmethods to directly create template enemies
     @classmethod
     def bandit(cls):
         return cls("Bandit", 14, 10, (1, 10), (1, 3), 30, 12, 12, 13, 4, 2)
@@ -37,6 +38,7 @@ class humanoid:
     def dummy(cls):
         return cls("Dummy", 1, 1, (1, 1), (1, 1), 1, 1, 1, 1, 1, 1)
 
+    # json import classmethod
     @classmethod
     def from_json(cls, file: str):
         json_data = json.loads(file)
@@ -60,13 +62,25 @@ class humanoid:
             json_data["RS"]
         )
 
+
     def tp_roll(self) -> int:
+        """
+        Roll for damage
+        @return: TP value
+        """
         return xd6(self.tp[0]) + self.tp[1]
 
     def ini_roll(self):
+        """
+        Roll for initiative
+        """
         return xd6(self.ini_param[0]) + self.ini_param[1]
     
     def attack_roll(self) -> str:
+        """
+        Roll on the attack value, create a tuple from the results and format them
+        @return: string representation of the roll
+        """
         res = d20()
 
         if res <= self.at:
@@ -78,6 +92,10 @@ class humanoid:
         return roll_tuple_to_string(res_tuple)
     
     def parry_roll(self) -> str:
+        """
+        Roll on the parry value, create a tuple from the results and format them
+        @return: string representation of the roll
+        """
         res = d20()
 
         if res <= self.pa:
@@ -89,6 +107,10 @@ class humanoid:
         return roll_tuple_to_string(res_tuple)
     
     def receive_damage(self, value: int):
+        """
+        Receive damage, under consideration of armor. Also adds wounds, if applicable
+        @param value: the TP to be added
+        """
         if value is None:
             pass
 
@@ -102,6 +124,9 @@ class humanoid:
             self.add_wound()
 
     def add_wound(self):
+        """
+        Add a wound, automatically reduce appropriate values
+        """
         self.wound_count += 1
         self.at -= 3
         self.pa -= 3
@@ -109,6 +134,9 @@ class humanoid:
         self.ge -= 3
     
     def remove_wound(self):
+        """
+        Remove a wound, if at least one exists
+        """
         if self.wound_count > 0:
             self.wound_count -= 1
             self.at += 3

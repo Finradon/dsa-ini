@@ -1,22 +1,21 @@
 import streamlit as st
 from enemies.humanoid import humanoid
-import uuid
-
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
 
+# define session state data (persistent across sessions)
 if 'data' not in st.session_state:
-    st.session_state['data'] = [humanoid.dummy()]
-
+    st.session_state['data'] = [humanoid.dummy()] # list of all fight participants
 
 if 'ini_idx' not in st.session_state:
-    st.session_state['ini_idx'] = 0
+    st.session_state['ini_idx'] = 0 # index of the fight participant whose turn it is
 
 if 'round' not in st.session_state:
-    st.session_state['round'] = 1
+    st.session_state['round'] = 1 # round counter
 
 
+# top buttons, general interaction
 with st.container(border=True):
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
@@ -36,6 +35,7 @@ with st.container(border=True):
     
     with col6:
         st.header(f"Runde: {st.session_state['round']}")
+
 
 ini_container = st.container(border=True)
 
@@ -68,10 +68,13 @@ if button5:
     st.session_state['ini_idx'] = 0
     st.session_state['round'] = 1   
 
-
+# set the appropriate particiapants turn to True
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
+
+# declaire and fill the container with the participants
 with ini_container:
+    # Column Titles
     col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
     with st.container(border=True):
         with col1:
@@ -89,9 +92,13 @@ with ini_container:
         with col7:
             st.header('RS')
 
+    # loop over all elements in the participant list
     for i, element in enumerate(st.session_state['data']):
-        # print(row)
+        
+        # use a border if it is the participants turn
         with st.container(border=element.turn):
+            
+            # init columns and display data
             col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
             with col1:
                 st.subheader(element.name)
@@ -100,6 +107,7 @@ with ini_container:
             with col3:
                 st.subheader(element.lep)        
             with col4:
+                # define an attack roll button
                 c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'AT: {element.at}', key=i)
@@ -107,6 +115,7 @@ with ini_container:
                     if atbutton:
                         st.subheader(element.attack_roll())
             with col5:
+                # parry roll button
                 c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'PA: {element.pa}', key=i+100)
@@ -118,11 +127,12 @@ with ini_container:
             with col7:
                 st.subheader(element.rs)
             with col8:
-                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+200)
+                # damage input
+                dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+200, label_visibility="hidden")
             with col9:
                 dmg_button = st.button("DMG", key=i+300, on_click=element.receive_damage, kwargs={"value": dmg})
                 
-
+# JSON import
 with st.container(border=True):
     col1, col2 = st.columns(2)
     with col1:

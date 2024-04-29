@@ -1,5 +1,11 @@
 
 def roll_tuple_to_string(res_tuple: tuple) ->str:
+    """
+    convert roll results to a string representation
+    @param res_tuple: Tuple of 2 or 3 elements: d20 result, success (bool), and tp (optional)
+    @return: String representation
+    """
+    
     res = res_tuple[0]
     suc = res_tuple[1]
 
