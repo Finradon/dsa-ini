@@ -1,12 +1,13 @@
 import streamlit as st
-from enemies.humanoid import humanoid
+from enemies.entity import entity
+from enemies.melee_fighter import melee_fighter
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
 
 # define session state data (persistent across sessions)
 if 'data' not in st.session_state:
-    st.session_state['data'] = [humanoid.dummy()] # list of all fight participants
+    st.session_state['data'] = [entity.dummy()] # list of all fight participants
 
 if 'ini_idx' not in st.session_state:
     st.session_state['ini_idx'] = 0 # index of the fight participant whose turn it is
@@ -41,15 +42,15 @@ ini_container = st.container(border=True)
 
 if button1:
     if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = humanoid.bandit()
+        st.session_state['data'][0] = melee_fighter.bandit()
     else:
-        st.session_state['data'].append(humanoid.bandit())
+        st.session_state['data'].append(melee_fighter.bandit())
 
 if button2:
     if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = humanoid.orc()
+        st.session_state['data'][0] = melee_fighter.orc()
     else:
-        st.session_state['data'].append(humanoid.orc())
+        st.session_state['data'].append(melee_fighter.orc())
 
 if button3:
     st.session_state['data'].sort(key=lambda x: x.ini, reverse=True)
@@ -64,7 +65,7 @@ if button4:
         st.session_state['round'] += 1
 
 if button5:
-    st.session_state['data'] = [humanoid.dummy()]
+    st.session_state['data'] = [entity.dummy()]
     st.session_state['ini_idx'] = 0
     st.session_state['round'] = 1   
 
@@ -123,7 +124,8 @@ with ini_container:
                     if atbutton:
                         st.subheader(element.parry_roll())
             with col6:
-                st.subheader(element.wound_count)
+                if hasattr(element, 'wound_count'):
+                    st.subheader(element.wound_count)
             with col7:
                 st.subheader(element.rs)
             with col8:
@@ -143,9 +145,9 @@ with st.container(border=True):
             for file in file_items:
                 file_data = file.getvalue().decode("utf-8")
                 if st.session_state['data'][0].name == "Dummy":
-                    st.session_state['data'][0] = humanoid.from_json(file=file_data)
+                    st.session_state['data'][0] = melee_fighter.from_json(file=file_data)
                 else:
-                    st.session_state['data'].append(humanoid.from_json(file=file_data))
+                    st.session_state['data'].append(melee_fighter.from_json(file=file_data))
         
         import_button = st.button('Import', on_click=process_files, kwargs={"file_items": files})
 

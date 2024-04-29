@@ -1,5 +1,5 @@
 {
-    "Name": "Bogenschütze",
+    "Name": "Dieb",
     "AT": 14,
     "PA": 12,
     "INI": {
@@ -15,5 +15,6 @@
     "KO": 13,
     "LeP": 30,
     "MR": 4,
-    "RS": 0
+    "RS": 0,
+    "Eisern": false
 }

@@ -1,42 +1,25 @@
 import json
-from utilities.dice import xd6, d20
-from utilities.formatting import roll_tuple_to_string
 import math
+from enemies.entity import entity
 
-class humanoid:
-    
-    def __init__(self, name, at, pa, ini_param: tuple, tp: tuple, lep, mu, ge, ko, mr, rs):
-        self.name:str = name
-        self.at: int = at
-        self.pa: int = pa
-        self.ini_param: tuple = ini_param # tuple containing number of d6s on index 0, and base ini on index 1
-        self.ini: int = self.ini_roll()
-        self.tp: tuple = tp # tuple containing number of d6s on index 0, and base tp on index 1
-        self.lep: int = lep
-        self.mu: int = mu
-        self.ge: int = ge
-        self.mr: int = mr
-        self.rs: int = rs
-        self.ko: int = ko
+class melee_fighter(entity):
+    def __init__(self, name, at, pa, ini_param: tuple, tp: tuple, lep, mu, ge, ko, mr, rs, eisern):
+        super().__init__(name, at, pa, ini_param, tp, lep, mu, ge, ko, mr, rs)
+        self.eisern: bool = eisern
         self.wound_count = 0
-        self.turn: bool = False
 
     # classmethods to directly create template enemies
     @classmethod
     def bandit(cls):
-        return cls("Bandit", 14, 10, (1, 10), (1, 3), 30, 12, 12, 13, 4, 2)
+        return cls("Bandit", 14, 10, (1, 10), (1, 3), 30, 12, 12, 13, 4, 2, False)
 
     @classmethod
     def orc(cls):
-        return cls("Ork", 15, 10, (1, 12), (1, 5), 35, 14, 13, 14, 3, 2)
+        return cls("Ork", 15, 10, (1, 12), (1, 5), 35, 14, 13, 14, 3, 2, True)
     
     @classmethod
     def orc_chief(cls):
-        return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3)
-    
-    @classmethod
-    def dummy(cls):
-        return cls("Dummy", 1, 1, (1, 1), (1, 1), 1, 1, 1, 1, 1, 1)
+        return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3, True)
 
     # json import classmethod
     @classmethod
@@ -59,52 +42,9 @@ class humanoid:
             json_data["GE"],
             json_data["KO"],
             json_data["MR"],
-            json_data["RS"]
+            json_data["RS"],
+            json_data["Eisern"]
         )
-
-
-    def tp_roll(self) -> int:
-        """
-        Roll for damage
-        @return: TP value
-        """
-        return xd6(self.tp[0]) + self.tp[1]
-
-    def ini_roll(self):
-        """
-        Roll for initiative
-        """
-        return xd6(self.ini_param[0]) + self.ini_param[1]
-    
-    def attack_roll(self) -> str:
-        """
-        Roll on the attack value, create a tuple from the results and format them
-        @return: string representation of the roll
-        """
-        res = d20()
-
-        if res <= self.at:
-            success = True
-        else: 
-            success = False
-
-        res_tuple = (res, success, self.tp_roll())
-        return roll_tuple_to_string(res_tuple)
-    
-    def parry_roll(self) -> str:
-        """
-        Roll on the parry value, create a tuple from the results and format them
-        @return: string representation of the roll
-        """
-        res = d20()
-
-        if res <= self.pa:
-            success = True
-        else: 
-            success = False
-
-        res_tuple = (res, success)
-        return roll_tuple_to_string(res_tuple)
     
     def receive_damage(self, value: int):
         """
@@ -155,7 +95,9 @@ class humanoid:
                 "MU": self.mu,
                 "GE": self.ge,
                 "KO": self.ko,
+                "Eisern": self.eisern,
                 "Wunden": self.wound_count
                 }
         
         return data
+    
