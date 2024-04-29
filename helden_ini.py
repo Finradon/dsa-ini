@@ -110,16 +110,7 @@ with st.container(border=True):
     col1, col2 = st.columns(2)
     with col1:
         files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
-
     with col2:
-        def process_files(file_items):
-            for file in file_items:
-                file_data = file.getvalue().decode("utf-8")
-                if st.session_state['data'][0].name == "Dummy":
-                    st.session_state['data'][0] = humanoid.from_json(file=file_data)
-                else:
-                    st.session_state['data'].append(humanoid.from_json(file=file_data))
-        
-        import_button = st.button('Import', on_click=process_files, kwargs={"file_items": files})
+        import_button = st.button('Import', on_click=bt_funcs.process_files, kwargs={"file_items": files})
 
 # st.write(st.session_state)
