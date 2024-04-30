@@ -1,6 +1,7 @@
 import streamlit as st
 from enemies.entity import entity
 from enemies.melee_fighter import melee_fighter
+import utilities.button_functions as bt_funcs
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
 st.title("Helden Initiative")
@@ -20,62 +21,33 @@ if 'round' not in st.session_state:
 with st.container(border=True):
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        button1 = st.button('add bandit')
+        button1 = st.button('Add Bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.bandit()})
 
     with col2:
-        button2 = st.button('add orc')
+        button2 = st.button('Add Orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.orc()})
 
     with col3:
-        button3 = st.button('Sort')
+        button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
 
     with col4:
-        button4 = st.button('Next')
+        button4 = st.button('Next', on_click=bt_funcs.next)
     
     with col5:
-        button5 = st.button('Reset')
+        button5 = st.button('Reset', on_click=bt_funcs.reset)
     
     with col6:
         st.header(f"Runde: {st.session_state['round']}")
 
 
-ini_container = st.container(border=True)
-
-if button1:
-    if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = melee_fighter.bandit()
-    else:
-        st.session_state['data'].append(melee_fighter.bandit())
-
-if button2:
-    if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = melee_fighter.orc()
-    else:
-        st.session_state['data'].append(melee_fighter.orc())
-
-if button3:
-    st.session_state['data'].sort(key=lambda x: x.ini, reverse=True)
-    for element in st.session_state['data']:
-        element.turn = False
-
-if button4:
-    if len(st.session_state['data'])-1 != st.session_state['ini_idx']:
-        st.session_state['ini_idx'] += 1
-    else:
-        st.session_state['ini_idx'] = 0
-        st.session_state['round'] += 1
-
-if button5:
-    st.session_state['data'] = [entity.dummy()]
-    st.session_state['ini_idx'] = 0
-    st.session_state['round'] = 1   
-
 # set the appropriate particiapants turn to True
 st.session_state['data'][st.session_state['ini_idx']].turn = True
 st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 
-# declaire and fill the container with the participants
+# declare and fill the container with the participants
+
+ini_container = st.container(border=True)
 with ini_container:
-    # Column Titles
+    # column titles
     col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
     with st.container(border=True):
         with col1:
@@ -108,7 +80,7 @@ with ini_container:
             with col3:
                 st.subheader(element.lep)        
             with col4:
-                # define an attack roll button
+                # attack roll button
                 c1, c2 = st.columns([1, 3])
                 with c1:
                     atbutton = st.button(f'AT: {element.at}', key=i)
@@ -139,16 +111,7 @@ with st.container(border=True):
     col1, col2 = st.columns(2)
     with col1:
         files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
-
     with col2:
-        def process_files(file_items):
-            for file in file_items:
-                file_data = file.getvalue().decode("utf-8")
-                if st.session_state['data'][0].name == "Dummy":
-                    st.session_state['data'][0] = melee_fighter.from_json(file=file_data)
-                else:
-                    st.session_state['data'].append(melee_fighter.from_json(file=file_data))
-        
-        import_button = st.button('Import', on_click=process_files, kwargs={"file_items": files})
+        import_button = st.button('Import', on_click=bt_funcs.process_files, kwargs={"file_items": files})
 
 # st.write(st.session_state)
