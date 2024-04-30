@@ -108,10 +108,12 @@ with ini_container:
                 
 # JSON import
 with st.container(border=True):
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         files = st.file_uploader("Importiere eigene Charaktere:", type='json', accept_multiple_files=True)
     with col2:
-        import_button = st.button('Import', on_click=bt_funcs.process_files, kwargs={"file_items": files})
+        option = st.selectbox("import options", ("Gegner (Nahkampf)", "Gegner (Fernkampf)", "Dämon"), label_visibility="collapsed")
+    with col3:
+        import_button = st.button('Import', on_click=bt_funcs.process_files, kwargs={"file_items": files, "class_name": option})
 
 # st.write(st.session_state)
