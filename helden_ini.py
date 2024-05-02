@@ -1,3 +1,4 @@
+import glob
 import streamlit as st
 from enemies.humanoid import humanoid
 import utilities.button_functions as bt_funcs
@@ -15,10 +16,9 @@ if 'ini_idx' not in st.session_state:
 if 'round' not in st.session_state:
     st.session_state['round'] = 1 # round counter
 
-
 # top buttons, general interaction
 with st.container(border=True):
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
     with col1:
         button1 = st.button('Add Bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": humanoid.bandit()})
 
@@ -33,8 +33,14 @@ with st.container(border=True):
     
     with col5:
         button5 = st.button('Reset', on_click=bt_funcs.reset)
-    
     with col6:
+        col1, col2 = st.columns(2)
+        with col1:
+            hero = st.selectbox("Helden hinzufügen", bt_funcs.get_names_from_dir("json-samples/helden"))
+        with col2:
+            st.button(':arrow_down:', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero})
+
+    with col7:  
         st.header(f"Runde: {st.session_state['round']}")
 
 
