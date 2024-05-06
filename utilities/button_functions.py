@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from enemies.entity import entity
 from utilities.entity_labels import map_entities
@@ -42,3 +43,20 @@ def process_files(file_items, class_name: str):
                 st.session_state['data'].append(class_type.from_json(file=file_data))
     else: 
         st.warning('File does not match class type.')
+
+# import a hero by its name
+def add_hero_from_name(name: str):
+    path = 'json-samples/helden/' + name + '.json'
+    with open(path) as f:
+        data = f.read()
+    st.session_state['data'].append(humanoid.from_json(data))
+
+# ----- NON-BUTTON-FUNCTIONS ----- #
+
+# get filenames given a directory
+def get_names_from_dir(dir: str) -> list:
+    file_list = os.listdir(dir)
+    for i, elem in enumerate(file_list):
+        file_list[i] = os.path.splitext(elem)[0]
+
+    return file_list
