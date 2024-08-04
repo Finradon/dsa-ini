@@ -1,26 +1,15 @@
 import json
 import math
 from enemies.entity import entity
+from utilities.dice import xd6, xd20
 
-class melee_fighter(entity):
+class hero(entity):
     def __init__(self, name, at, pa, ini_param: tuple, tp: tuple, lep, mu, ge, ko, mr, rs, eisern):
         super().__init__(name, at, pa, ini_param, tp, lep, mu, ge, ko, mr, rs)
         self.eisern: bool = eisern
         self.wound_count = 0
 
-    # classmethods to directly create template enemies
-    @classmethod
-    def bandit(cls):
-        return cls("Bandit", 14, 10, (1, 10), (1, 3), 30, 12, 12, 13, 4, 2, False)
-
-    @classmethod
-    def orc(cls):
-        return cls("Ork", 15, 10, (1, 12), (1, 5), 35, 14, 13, 14, 3, 2, True)
     
-    @classmethod
-    def orc_chief(cls):
-        return cls("Ork-Häuptling", 19, 14, (1, 18), (2, 4), 45, 16, 14, 16, 5, 3, True)
-
     # json import classmethod
     @classmethod
     def from_json(cls, file: str):
@@ -83,21 +72,3 @@ class melee_fighter(entity):
             self.pa += 3
             self.ini += 3
             self.ge += 3
-
-    def to_dict(self) -> dict:
-        data = {"Name": self.name,
-                "INI": self.ini,
-                "LeP": self.lep,
-                "AT": self.at,
-                "PA": self.pa,
-                "RS": self.rs,
-                "MR": self.mr,
-                "MU": self.mu,
-                "GE": self.ge,
-                "KO": self.ko,
-                "Eisern": self.eisern,
-                "Wunden": self.wound_count
-                }
-        
-        return data
-    

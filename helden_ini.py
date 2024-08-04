@@ -2,6 +2,7 @@ import glob
 import streamlit as st
 from enemies.entity import entity
 from enemies.melee_fighter import melee_fighter
+from enemies.hero import hero
 import utilities.button_functions as bt_funcs
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
@@ -54,7 +55,7 @@ st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 ini_container = st.container(border=True)
 with ini_container:
     # column titles
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
+    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1])
     with st.container(border=True):
         with col1:
             st.header('Name')
@@ -78,13 +79,21 @@ with ini_container:
         with st.container(border=element.turn):
             
             # init columns and display data
-            col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2, 1, 1, 4, 4, 2, 1, 1, 1])
+            col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1])
             with col1:
                 st.subheader(element.name)
             with col2:
-                st.subheader(element.ini)
+                
+                if type(element).__name__ == 'hero':
+                    # ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden")
+                    # ini_button = st.button("Set", key=i+500, on_click=element.set_ini, kwargs={"value": ini})
+                    ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden", placeholder=element.ini)
+                    if ini:
+                        element.set_ini(ini)
+                else:
+                    st.subheader(element.ini)   
             with col3:
-                st.subheader(element.lep)        
+                st.subheader(element.lep)
             with col4:
                 # attack roll button
                 c1, c2 = st.columns([1, 3])

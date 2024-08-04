@@ -71,10 +71,18 @@ class entity:
         @param value: the TP to be added
         """
         if value is None:
-            pass
-
+            return
+        
         damage = value - self.rs
         if damage < 0:
             damage = 0
         self.lep -= damage
 
+    def regenerate(self):
+        return
+
+    def set_ini(self, value):
+        """
+        Set the initiative value manually, so that players can roll themselves
+        """
+        self.ini = value

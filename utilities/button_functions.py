@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from enemies.entity import entity
+from enemies.hero import hero
 from utilities.entity_labels import map_entities
 
 # button1&2: Add generic bandit
@@ -23,6 +24,7 @@ def next():
     else:
         st.session_state['ini_idx'] = 0
         st.session_state['round'] += 1
+        # ToDo: Invoke Regenerate Method
 
 # button5: reset the list
 def reset():
@@ -49,7 +51,7 @@ def add_hero_from_name(name: str):
     path = 'json-samples/helden/' + name + '.json'
     with open(path) as f:
         data = f.read()
-    st.session_state['data'].append(humanoid.from_json(data))
+    st.session_state['data'].append(hero.from_json(data))
 
 # ----- NON-BUTTON-FUNCTIONS ----- #
 
