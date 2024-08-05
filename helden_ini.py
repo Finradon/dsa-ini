@@ -3,6 +3,7 @@ import streamlit as st
 from enemies.entity import entity
 from enemies.melee_fighter import melee_fighter
 from enemies.hero import hero
+from enemies.demon import demon
 import utilities.button_functions as bt_funcs
 
 st.set_page_config(layout="wide", page_title="Helden Initiative")
@@ -24,8 +25,14 @@ with st.container(border=True):
     with col1:
         button1 = st.button('Add Bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.bandit()})
 
+    # with col2:
+    #     button2 = st.button('Add Orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.orc()})
     with col2:
-        button2 = st.button('Add Orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.orc()})
+        col1, col2 = st.columns(2)
+        with col1:
+            demon_name = st.selectbox("DÄmon hinzufügen", bt_funcs.get_names_from_dir("json-samples/demons"))
+        with col2:
+            st.button('😈', on_click=bt_funcs.add_demon_from_name, kwargs={"name": demon_name})
 
     with col3:
         button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
@@ -38,9 +45,9 @@ with st.container(border=True):
     with col6:
         col1, col2 = st.columns(2)
         with col1:
-            hero = st.selectbox("Helden hinzufügen", bt_funcs.get_names_from_dir("json-samples/helden"))
+            hero_name = st.selectbox("Helden hinzufügen", bt_funcs.get_names_from_dir("json-samples/helden"))
         with col2:
-            st.button(':arrow_down:', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero})
+            st.button(':arrow_down:', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero_name})
 
     with col7:  
         st.header(f"Runde: {st.session_state['round']}")

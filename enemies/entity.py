@@ -11,6 +11,7 @@ class entity:
         self.ini: int = self.ini_roll()
         self.tp: tuple = tp # tuple containing number of d6s on index 0, and base tp on index 1
         self.lep: int = lep
+        self.max_lep: int = lep
         self.mu: int = mu
         self.ge: int = ge
         self.ko: int = ko

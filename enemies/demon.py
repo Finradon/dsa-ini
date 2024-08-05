@@ -39,7 +39,7 @@ class demon(entity):
             json_data["KO"],
             json_data["MR"],
             json_data["RS"],
-            json_data["Eisern"]
+            json_data["Regeneration"]
         )
     
     def receive_damage(self, value: int):
@@ -60,3 +60,5 @@ class demon(entity):
         Regenerate LeP according to the regeneration feat (WdZ S. 234)
         """
         self.lep = self.lep + xd6(self.regen)
+        if self.lep > self.max_lep:
+            self.lep = self.max_lep

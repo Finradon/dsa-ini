@@ -1,7 +1,7 @@
 import json
 import math
 from enemies.entity import entity
-from utilities.dice import xd6, xd20
+# from utilities.dice import xd6, xd20
 
 class hero(entity):
     def __init__(self, name, at, pa, ini_param: tuple, tp: tuple, lep, mu, ge, ko, mr, rs, eisern):
