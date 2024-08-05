@@ -63,6 +63,9 @@ def add_demon_from_name(name: str):
         data = f.read()
     st.session_state['data'].append(demon.from_json(data))
 
+def remove_entity(ent: entity):
+    st.session_state['data'].remove(ent)
+
 
 # ----- NON-BUTTON-FUNCTIONS ----- #
 

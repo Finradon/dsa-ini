@@ -35,20 +35,26 @@ class hero(entity):
             json_data["Eisern"]
         )
     
-    def receive_damage(self, value: int):
+    def receive_damage(self, value: int, tp: bool):
         """
         Receive damage, under consideration of armor. Also adds wounds, if applicable
         @param value: the TP to be added
         """
         if value is None:
             return
+        sp_correction = 0
+        if not tp:
+            sp_correction = self.rs
 
-        damage = value - self.rs
+        damage = value - self.rs + sp_correction
         if damage < 0:
             damage = 0
         self.lep -= damage
 
-        nr_wounds = math.floor((damage-1)/self.ko)
+        if self.eisern:
+            eisern = 2
+        
+        nr_wounds = math.floor((damage-1)/(self.ko + eisern))
         for _ in range(nr_wounds):
             self.add_wound()
 

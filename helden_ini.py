@@ -62,7 +62,7 @@ st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 ini_container = st.container(border=True)
 with ini_container:
     # column titles
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1])
+    col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1, 1])
     with st.container(border=True):
         with col1:
             st.header('Name')
@@ -86,7 +86,7 @@ with ini_container:
         with st.container(border=element.turn):
             
             # init columns and display data
-            col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1])
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1, 1])
             with col1:
                 st.subheader(element.name)
             with col2:
@@ -126,7 +126,10 @@ with ini_container:
                 # damage input
                 dmg = st.number_input(label="Schaden", value=None, min_value=0, key=i+200, label_visibility="hidden")
             with col9:
-                dmg_button = st.button("DMG", key=i+300, on_click=element.receive_damage, kwargs={"value": dmg})
+                tp_button = st.button("TP", key=i+300, on_click=element.receive_damage, kwargs={"value": dmg, "tp": True})
+                sp_button = st.button("SP", key=i+500, on_click=element.receive_damage, kwargs={"value": dmg, "tp": False})
+            with col10:
+                remove_button = st.button("❌", key = i + 600, on_click=bt_funcs.remove_entity, kwargs={"ent": element})
                 
 # JSON import
 with st.container(border=True):
@@ -138,4 +141,3 @@ with st.container(border=True):
     with col3:
         import_button = st.button('Import', on_click=bt_funcs.process_files, kwargs={"file_items": files, "class_name": option})
 
-# st.write(st.session_state)

@@ -41,19 +41,6 @@ class demon(entity):
             json_data["RS"],
             json_data["Regeneration"]
         )
-    
-    def receive_damage(self, value: int):
-        """
-        Receive damage, under consideration of armor. Also adds wounds, if applicable
-        @param value: the TP to be added
-        """
-        if value is None:
-            return
-
-        damage = value - self.rs
-        if damage < 0:
-            damage = 0
-        self.lep -= damage
 
     def regenerate(self):
         """

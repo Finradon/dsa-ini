@@ -66,7 +66,7 @@ class entity:
         res_tuple = (res, success)
         return roll_tuple_to_string(res_tuple)
     
-    def receive_damage(self, value: int):
+    def receive_damage(self, value: int, tp: bool):
         """
         Receive damage, under consideration of armor. 
         @param value: the TP to be added
@@ -74,7 +74,11 @@ class entity:
         if value is None:
             return
         
-        damage = value - self.rs
+        sp_correction = 0
+        if not tp:
+            sp_correction = self.rs
+
+        damage = value - self.rs + sp_correction
         if damage < 0:
             damage = 0
         self.lep -= damage
