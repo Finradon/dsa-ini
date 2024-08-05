@@ -1,0 +1,20 @@
+{
+    "Name": "Shruuf",
+    "AT": 15,
+    "PA": 6,
+    "INI": {
+        "W6": 1,
+        "Basis": 9
+    },
+    "TP": {
+        "W6": 2,
+        "Basis": 4
+    },
+    "MU": 20,
+    "GE": 20,
+    "KO": 20,
+    "LeP": 50,
+    "MR": 12,
+    "RS": 5,
+    "Regeneration": 1
+}

@@ -1,0 +1,20 @@
+{
+    "Name": "Azzitai",
+    "AT": 15,
+    "PA": 10,
+    "INI": {
+        "W6": 1,
+        "Basis": 12
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 6
+    },
+    "MU": 20,
+    "GE": 20,
+    "KO": 20,
+    "LeP": 100,
+    "MR": 12,
+    "RS": 5,
+    "Regeneration": 0
+}
