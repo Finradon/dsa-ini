@@ -3,14 +3,8 @@ import streamlit as st
 from enemies.entity import entity
 from enemies.hero import hero
 from enemies.demon import demon
+from enemies.melee_fighter import melee_fighter
 from utilities.entity_labels import map_entities
-
-# button1&2: Add generic bandit
-def add_enemy(enemy: entity):
-    if st.session_state['data'][0].name == "Dummy":
-        st.session_state['data'][0] = enemy
-    else:
-        st.session_state['data'].append(enemy)
 
 # button3: sort the initiative list
 def sort_enemies():
@@ -54,14 +48,20 @@ def add_hero_from_name(name: str):
     path = 'json-samples/helden/' + name + '.json'
     with open(path) as f:
         data = f.read()
-    st.session_state['data'].append(hero.from_json(data))
+    add_entity(hero.from_json(data))
 
 # import a demon by its name
 def add_demon_from_name(name: str):
     path = 'json-samples/demons/' + name + '.json'
     with open(path) as f:
         data = f.read()
-    st.session_state['data'].append(demon.from_json(data))
+    add_entity(demon.from_json(data))
+
+def add_humanoid_from_name(name: str):
+    path = 'json-samples/humanoids/' + name + '.json'
+    with open(path) as f:
+        data = f.read()
+    add_entity(melee_fighter.from_json(data))
 
 def remove_entity(ent: entity):
     if len(st.session_state['data']) == 1:
@@ -79,3 +79,23 @@ def get_names_from_dir(dir: str) -> list:
         file_list[i] = os.path.splitext(elem)[0]
 
     return file_list
+
+def get_name_count(name: str) -> int:
+    counter = 0
+    for entity in st.session_state['data']:
+        if entity.name[:len(name)] == name:
+            counter += 1
+
+    return counter
+
+def add_entity(ent: entity):
+
+    nr = get_name_count(ent.name) + 1
+    ent.name = ent.name + " " + str(nr)
+
+    if st.session_state['data'][0].name == "Dummy":
+        st.session_state['data'][0] = ent
+    else:
+        st.session_state['data'].append(ent)
+
+

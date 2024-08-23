@@ -21,33 +21,37 @@ if 'round' not in st.session_state:
 
 # top buttons, general interaction
 with st.container(border=True):
-    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
-    with col1:
-        button1 = st.button('Add Bandit', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.bandit()})
+    col1, col2, col3, col4, col5, col6, col7 = st.columns([3, 3, 3, 1, 1, 1, 2])
 
-    # with col2:
-    #     button2 = st.button('Add Orc', on_click=bt_funcs.add_enemy, kwargs={"enemy": melee_fighter.orc()})
+    with col1:
+        ccol1, ccol2 = st.columns(2) # no idea why this is, but if you rename these to "col1", it doesn't work anymore
+        with ccol1:
+            demon_name = st.selectbox("Dämon hinzufügen", bt_funcs.get_names_from_dir("json-samples/demons"))
+        with ccol2:
+            st.button('😈', on_click=bt_funcs.add_demon_from_name, kwargs={"name": demon_name})
+
     with col2:
         col1, col2 = st.columns(2)
         with col1:
-            demon_name = st.selectbox("DÄmon hinzufügen", bt_funcs.get_names_from_dir("json-samples/demons"))
+            humanoid_name = st.selectbox("Mensch hinzufügen", bt_funcs.get_names_from_dir("json-samples/humanoids"))
         with col2:
-            st.button('😈', on_click=bt_funcs.add_demon_from_name, kwargs={"name": demon_name})
-
-    with col3:
-        button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
-
-    with col4:
-        button4 = st.button('Next', on_click=bt_funcs.next)
+            st.button('⚔️', on_click=bt_funcs.add_humanoid_from_name, kwargs={"name": humanoid_name})
     
-    with col5:
-        button5 = st.button('Reset', on_click=bt_funcs.reset)
-    with col6:
+    with col3:
         col1, col2 = st.columns(2)
         with col1:
             hero_name = st.selectbox("Helden hinzufügen", bt_funcs.get_names_from_dir("json-samples/helden"))
         with col2:
-            st.button(':arrow_down:', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero_name})
+            st.button('🦸', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero_name})
+    
+    with col4:
+        button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
+
+    with col5:
+        button4 = st.button('⏭️', on_click=bt_funcs.next)
+    
+    with col6:
+        button5 = st.button('🔄', on_click=bt_funcs.reset)
 
     with col7:  
         st.header(f"Runde: {st.session_state['round']}")
@@ -62,7 +66,7 @@ st.session_state['data'][st.session_state['ini_idx'] - 1].turn = False
 ini_container = st.container(border=True)
 with ini_container:
     # column titles
-    col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1, 1])
+    col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([3, 1, 1, 4, 4, 2, 1, 2, 1, 1])
     with st.container(border=True):
         with col1:
             st.header('Name')
@@ -86,7 +90,7 @@ with ini_container:
         with st.container(border=element.turn):
             
             # init columns and display data
-            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([1, 1, 1, 3, 3, 1, 1, 1, 1, 1])
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns([3, 1, 1, 4, 4, 2, 1, 2, 1, 1])
             with col1:
                 st.subheader(element.name)
             with col2:
