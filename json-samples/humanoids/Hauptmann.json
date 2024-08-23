@@ -1,0 +1,20 @@
+{
+    "Name": "Hauptmann",
+    "AT": 18,
+    "PA": 16,
+    "INI": {
+        "W6": 1,
+        "Basis": 14
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 6
+    },
+    "MU": 14,
+    "GE": 14,
+    "KO": 15,
+    "LeP": 35,
+    "MR": 5,
+    "RS": 4,
+    "Eisern": true
+}

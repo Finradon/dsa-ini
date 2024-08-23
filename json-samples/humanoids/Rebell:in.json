@@ -1,0 +1,20 @@
+{
+    "Name": "Rebell:in",
+    "AT": 15,
+    "PA": 14,
+    "INI": {
+        "W6": 1,
+        "Basis": 12
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 5
+    },
+    "MU": 12,
+    "GE": 13,
+    "KO": 14,
+    "LeP": 32,
+    "MR": 4,
+    "RS": 3,
+    "Eisern": false
+}

@@ -1,0 +1,20 @@
+{
+    "Name": "Kampfmagier",
+    "AT": 14,
+    "PA": 17,
+    "INI": {
+        "W6": 1,
+        "Basis": 15
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 5
+    },
+    "MU": 16,
+    "GE": 14,
+    "KO": 16,
+    "LeP": 32,
+    "MR": 6,
+    "RS": 1,
+    "Eisern": true
+}

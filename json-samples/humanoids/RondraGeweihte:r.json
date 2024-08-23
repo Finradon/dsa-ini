@@ -1,0 +1,20 @@
+{
+    "Name": "RondraGeweihte:r",
+    "AT": 18,
+    "PA": 17,
+    "INI": {
+        "W6": 1,
+        "Basis": 16
+    },
+    "TP": {
+        "W6": 2,
+        "Basis": 4
+    },
+    "MU": 15,
+    "GE": 13,
+    "KO": 15,
+    "LeP": 37,
+    "MR": 6,
+    "RS": 4,
+    "Eisern": true
+}

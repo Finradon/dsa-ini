@@ -1,0 +1,20 @@
+{
+    "Name": "Hauptfrau Eisenhelm",
+    "AT": 20,
+    "PA": 23,
+    "INI": {
+        "W6": 1,
+        "Basis": 20
+    },
+    "TP": {
+        "W6": 2,
+        "Basis": 6
+    },
+    "MU": 16,
+    "GE": 14,
+    "KO": 16,
+    "LeP": 45,
+    "MR": 7,
+    "RS": 4,
+    "Eisern": true
+}

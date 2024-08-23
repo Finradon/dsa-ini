@@ -1,0 +1,20 @@
+{
+    "Name": "Krieger:in",
+    "AT": 20,
+    "PA": 17,
+    "INI": {
+        "W6": 1,
+        "Basis": 17
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 7
+    },
+    "MU": 14,
+    "GE": 15,
+    "KO": 14,
+    "LeP": 37,
+    "MR": 4,
+    "RS": 3,
+    "Eisern": false
+}
