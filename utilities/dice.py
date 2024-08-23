@@ -1,6 +1,13 @@
+from enum import Enum
 from random import randint
 # module to define custom dice methods
 
+class roll(Enum):
+    CRIT = 1
+    CRIT_CONF = 2
+    SUCCESS = 3
+    FAIL = 4
+    FAIL_CONF = 5
 
 def d20 () -> int:
     """

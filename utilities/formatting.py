@@ -1,3 +1,4 @@
+from utilities.dice import roll
 
 def roll_tuple_to_string(res_tuple: tuple) ->str:
     """
@@ -9,14 +10,30 @@ def roll_tuple_to_string(res_tuple: tuple) ->str:
     res = res_tuple[0]
     suc = res_tuple[1]
 
-    if suc:
+    if suc == roll.SUCCESS:
         suc_str = ":white_check_mark:"
         if len(res_tuple) == 3:
             tp = f"TP: {res_tuple[2]}"
         else:
             tp = ""
-    else: 
-        suc_str = ":x:"
+    elif suc == roll.CRIT:
+        suc_str = "🎯"
+        if len(res_tuple) == 3:
+            tp = f"TP: {res_tuple[2]}"
+        else:
+            tp = ""
+    elif suc == roll.CRIT_CONF:
+        suc_str = "🎯‼️"
+        if len(res_tuple) == 3:
+            tp = f"TP: {res_tuple[2]*2}"        
+        else:
+            tp = ""
+    elif suc == roll.FAIL:
+        suc_str = "❌"
         tp = ""
+    elif suc == roll.FAIL_CONF:
+        suc_str = "❌‼️"
+        tp = ""
+
 
     return f'{suc_str}:{res} ' + tp

@@ -1,4 +1,4 @@
-from utilities.dice import xd6, d20
+from utilities.dice import xd6, d20, roll
 from utilities.formatting import roll_tuple_to_string
 
 class entity:
@@ -43,10 +43,22 @@ class entity:
         """
         res = d20()
 
-        if res <= self.at:
-            success = True
+        if res == 20:
+            if d20() > self.at:
+                success = roll.FAIL_CONF
+            else:
+                success = roll.FAIL
+        elif res <= self.at:
+            if res == 1:
+                if d20() < self.at:
+                    success = roll.CRIT_CONF
+                else:
+                    success = roll.CRIT
+            else:
+                success = roll.SUCCESS    
+            
         else: 
-            success = False
+            success = roll.FAIL
 
         res_tuple = (res, success, self.tp_roll())
         return roll_tuple_to_string(res_tuple)
@@ -58,10 +70,22 @@ class entity:
         """
         res = d20()
 
-        if res <= self.pa:
-            success = True
+        if res == 20:
+            if d20() > self.pa:
+                success = roll.FAIL_CONF
+            else:
+                success = roll.FAIL
+        elif res <= self.pa:
+            if res == 1:
+                if d20() < self.pa:
+                    success = roll.CRIT_CONF
+                else:
+                    success = roll.CRIT
+            else:
+                success = roll.SUCCESS    
+            
         else: 
-            success = False
+            success = roll.FAIL
 
         res_tuple = (res, success)
         return roll_tuple_to_string(res_tuple)
