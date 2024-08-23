@@ -107,6 +107,9 @@ class entity:
             damage = 0
         self.lep -= damage
 
+        if self.lep <= 0:
+            self.name = self.name + "☠️"
+
     def regenerate(self):
         return
 

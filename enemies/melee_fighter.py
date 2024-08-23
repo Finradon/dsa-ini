@@ -72,6 +72,9 @@ class melee_fighter(entity):
         for _ in range(nr_wounds):
             self.add_wound()
 
+        if self.lep <= 0:
+            self.name = self.name + "☠️"
+
     def add_wound(self):
         """
         Add a wound, automatically reduce appropriate values
