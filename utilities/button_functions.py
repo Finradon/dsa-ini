@@ -64,6 +64,9 @@ def add_demon_from_name(name: str):
     st.session_state['data'].append(demon.from_json(data))
 
 def remove_entity(ent: entity):
+    if len(st.session_state['data']) == 1:
+        st.session_state['data'].append(entity.dummy())
+        
     st.session_state['data'].remove(ent)
 
 
