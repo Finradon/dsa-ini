@@ -65,6 +65,8 @@ class melee_fighter(entity):
 
         if self.eisern:
             eisern = 2
+        else:
+            eisern = 0
             
         nr_wounds = math.floor((damage-1)/(self.ko + eisern))
         for _ in range(nr_wounds):
