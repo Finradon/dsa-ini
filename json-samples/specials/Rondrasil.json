@@ -1,0 +1,20 @@
+{
+    "Name": "Rondrasil",
+    "AT": 21,
+    "PA": 19,
+    "INI": {
+        "W6": 1,
+        "Basis": 15
+    },
+    "TP": {
+        "W6": 2,
+        "Basis": 4
+    },
+    "MU": 16,
+    "GE": 14,
+    "KO": 16,
+    "LeP": 40,
+    "MR": 7,
+    "RS": 4,
+    "Eisern": true
+}
