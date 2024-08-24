@@ -1,0 +1,20 @@
+{
+    "Name": "Drachengardist:in",
+    "AT": 19,
+    "PA": 19,
+    "INI": {
+        "W6": 1,
+        "Basis": 17
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 6
+    },
+    "MU": 14,
+    "GE": 15,
+    "KO": 14,
+    "LeP": 40,
+    "MR": 4,
+    "RS": 3,
+    "Eisern": true
+}

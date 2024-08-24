@@ -1,0 +1,20 @@
+{
+    "Name": "Liliengardist:in",
+    "AT": 16,
+    "PA": 18,
+    "INI": {
+        "W6": 1,
+        "Basis": 14
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 5
+    },
+    "MU": 14,
+    "GE": 15,
+    "KO": 14,
+    "LeP": 33,
+    "MR": 4,
+    "RS": 2,
+    "Eisern": false
+}

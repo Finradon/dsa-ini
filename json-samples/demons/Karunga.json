@@ -1,0 +1,20 @@
+{
+    "Name": "Karunga",
+    "AT": 15,
+    "PA": 12,
+    "INI": {
+        "W6": 1,
+        "Basis": 18
+    },
+    "TP": {
+        "W6": 0,
+        "Basis": 0
+    },
+    "MU": 20,
+    "GE": 20,
+    "KO": 20,
+    "LeP": 15,
+    "MR": 25,
+    "RS": 1,
+    "Regeneration": 0
+}
