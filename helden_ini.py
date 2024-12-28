@@ -101,15 +101,12 @@ with ini_container:
             with col1:
                 st.subheader(element.name)
             with col2:
-                
-                if type(element).__name__ == 'hero':
-                    # ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden")
-                    # ini_button = st.button("Set", key=i+500, on_click=element.set_ini, kwargs={"value": ini})
-                    ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden", placeholder=element.ini)
-                    if ini:
-                        element.set_ini(ini)
-                else:
-                    st.subheader(element.ini)   
+                # ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden")
+                # ini_button = st.button("Set", key=i+500, on_click=element.set_ini, kwargs={"value": ini})
+                ini = st.number_input(label="Ini", value=None, min_value=0, key=i+400, label_visibility="hidden", placeholder=element.ini)
+                if ini:
+                    element.set_ini(ini)
+
             with col3:
                 st.subheader(element.lep)
             with col4:
