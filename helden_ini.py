@@ -21,7 +21,7 @@ if 'round' not in st.session_state:
 
 # top buttons, general interaction
 with st.container(border=True):
-    col1, col2, col3, col4, col5, col6, col7 = st.columns([3, 3, 3, 1, 1, 1, 2])
+    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([3, 3, 3, 3, 1, 1, 1, 2])
 
     with col1:
         ccol1, ccol2 = st.columns(2) # no idea why this is, but if you rename these to "col1", it doesn't work anymore
@@ -40,20 +40,27 @@ with st.container(border=True):
     with col3:
         col1, col2 = st.columns(2)
         with col1:
+            npc_name = st.selectbox("NPC hinzufügen", bt_funcs.get_names_from_dir("json-samples/specials"))
+        with col2:
+            st.button('🗡️', on_click=bt_funcs.add_npc_from_name, kwargs={"name": npc_name})
+        
+    with col4:
+        col1, col2 = st.columns(2)
+        with col1:
             hero_name = st.selectbox("Helden hinzufügen", bt_funcs.get_names_from_dir("json-samples/helden"))
         with col2:
             st.button('🦸', on_click=bt_funcs.add_hero_from_name, kwargs={"name": hero_name})
     
-    with col4:
+    with col5:
         button3 = st.button('Sort', on_click=bt_funcs.sort_enemies)
 
-    with col5:
+    with col6:
         button4 = st.button('⏭️', on_click=bt_funcs.next)
     
-    with col6:
+    with col7:
         button5 = st.button('🔄', on_click=bt_funcs.reset)
 
-    with col7:  
+    with col8:  
         st.header(f"Runde: {st.session_state['round']}")
 
 

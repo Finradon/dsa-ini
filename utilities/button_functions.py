@@ -63,6 +63,12 @@ def add_humanoid_from_name(name: str):
         data = f.read()
     add_entity(melee_fighter.from_json(data))
 
+def add_npc_from_name(name: str):
+    path = 'json-samples/specials/' + name + '.json'
+    with open(path) as f:
+        data = f.read()
+    add_entity(melee_fighter.from_json(data))
+
 def remove_entity(ent: entity):
     if len(st.session_state['data']) == 1:
         st.session_state['data'].append(entity.dummy())
@@ -90,8 +96,9 @@ def get_name_count(name: str) -> int:
 
 def add_entity(ent: entity):
 
-    nr = get_name_count(ent.name) + 1
-    ent.name = ent.name + " " + str(nr)
+    if ent.name not in get_names_from_dir('json-samples/helden') + get_names_from_dir('json-samples/specials'):
+        nr = get_name_count(ent.name) + 1
+        ent.name = ent.name + " " + str(nr)
 
     if st.session_state['data'][0].name == "Dummy":
         st.session_state['data'][0] = ent
