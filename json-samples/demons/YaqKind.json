@@ -1,0 +1,20 @@
+{
+    "Name": "Yaq-Kind",
+    "AT": 22,
+    "PA": 17,
+    "INI": {
+        "W6": 1,
+        "Basis": 20
+    },
+    "TP": {
+        "W6": 2,
+        "Basis": 4
+    },
+    "MU": 20,
+    "GE": 20,
+    "KO": 20,
+    "LeP": 25,
+    "MR": 25,
+    "RS": 8,
+    "Regeneration": 2
+}

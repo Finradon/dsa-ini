@@ -1,0 +1,20 @@
+{
+    "Name": "Frannio",
+    "AT": 20,
+    "PA": 15,
+    "INI": {
+        "W6": 1,
+        "Basis": 17
+    },
+    "TP": {
+        "W6": 3,
+        "Basis": 10
+    },
+    "MU": 18,
+    "GE": 14,
+    "KO": 16,
+    "LeP": 50,
+    "MR": 4,
+    "RS": 5,
+    "Eisern": true
+}

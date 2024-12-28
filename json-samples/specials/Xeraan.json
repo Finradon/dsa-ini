@@ -1,0 +1,20 @@
+{
+    "Name": "Xeraan",
+    "AT": 10,
+    "PA": 14,
+    "INI": {
+        "W6": 1,
+        "Basis": 12
+    },
+    "TP": {
+        "W6": 1,
+        "Basis": 1
+    },
+    "MU": 16,
+    "GE": 14,
+    "KO": 16,
+    "LeP": 28,
+    "MR": 6,
+    "RS": 0,
+    "Eisern": false
+}
